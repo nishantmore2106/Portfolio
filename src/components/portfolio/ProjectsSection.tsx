@@ -10,7 +10,7 @@ const projects = [
   },
   {
     title: "InsightIQ",
-    tag: "SAAS PRODUCT",
+    tag: "DASHBOARD",
     description: "Analytics platform.",
     image: "/insgihtIQ.png",
     link: "https://id-preview--a4bd5a3d-239e-4598-9010-e676decef9a9.lovable.app/dashboard",
@@ -24,7 +24,7 @@ const projects = [
   },
   {
     title: "Loom AI",
-    tag: "PORTFOLIO",
+    tag: "AI PLATFORM",
     description: "Documentation platform.",
     image: "/LOOM.AI.png",
     link: "https://id-preview--15a96c45-aed9-4ed3-b2c9-dcfe251de89c.lovable.app/",
