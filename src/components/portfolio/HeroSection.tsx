@@ -85,48 +85,18 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Portrait card */}
+          {/* Portrait Placeholder (ScrollingPortrait will overlap this exactly at scrollY=0) */}
           <div className="portrait-wrapper">
             <div
-              ref={portraitRef}
-              className="portrait-inner relative overflow-hidden"
+              id="portrait-hero-anchor"
+              className="portrait-inner relative overflow-hidden opacity-0"
               style={{
-                width: "clamp(220px, 28vw, 340px)",
-                height: "clamp(280px, 36vw, 440px)",
-                borderRadius: "2rem",
-                transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translateZ(${-scrollZ}px)`,
-                background: "linear-gradient(135deg, #1a1a1a 0%, #252525 50%, #1a1a1a 100%)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                
+                width: "clamp(280px, 32vw, 420px)",
+                height: "clamp(360px, 42vw, 540px)",
+                borderRadius: "2.5rem",
               }}
-                
             >
-              {/* Portrait image */}
-              <img
-      src="\potrait (2).png"
-      alt="Portrait"
-      className="absolute inset-0 w-full h-full object-cover"
-    />
-
-              {/* Placeholder portrait gradient */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(160deg, rgba(208,255,113,0.12) 0%, transparent 50%, rgba(208,255,113,0.05) 100%)",
-                }}
-              />
-              
-                
-              {/* Shine overlay */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%)",
-                  pointerEvents: "none",
-                }}
-              />
+              {/* Image removed to prevent duplication/flicker */}
             </div>
           </div>
         </div>

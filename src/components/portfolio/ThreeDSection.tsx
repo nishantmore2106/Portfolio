@@ -1,46 +1,18 @@
-import { useEffect, useRef } from "react";
+import React from "react";
 
 export default function ThreeDSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const el = sectionRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const scrollProgress = Math.max(
-        0,
-        Math.min(1, 1 - rect.top / window.innerHeight)
-      );
-
-      const mockup = el.querySelector(".mockup") as HTMLElement;
-      if (mockup) {
-        mockup.style.transform = `
-          rotateX(${10 - scrollProgress * 20}deg)
-          rotateY(${scrollProgress * 15}deg)
-          translateY(${scrollProgress * -40}px)
-        `;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       className="py-32 relative overflow-hidden"
       style={{
         background:
           "radial-gradient(circle at 80% 20%, rgba(208,255,113,0.08), transparent 50%), #0f0f0f",
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col gap-16 items-center">
 
         {/* LEFT CONTENT */}
-        <div>
+        <div className="flex flex-col items-center text-center">
           <p
             className="text-xs uppercase tracking-widest mb-6"
             style={{ color: "#D0FF71" }}
@@ -67,7 +39,7 @@ export default function ThreeDSection() {
             and cinematic transitions powered by modern motion frameworks.
           </p>
 
-          <ul className="space-y-4 text-white/70">
+          <ul className="space-y-4 text-white/70 text-left">
             <li>→ Scroll-driven animations</li>
             <li>→ Parallax depth layers</li>
             <li>→ 3D model integration</li>
@@ -77,33 +49,32 @@ export default function ThreeDSection() {
         </div>
 
         {/* RIGHT MOCKUP */}
-        <div className="relative flex justify-center items-center">
+        <div className="relative flex justify-center items-center w-full">
 
           {/* Glow background */}
           <div
-            className="absolute w-[500px] h-[500px] rounded-full blur-3xl opacity-30"
+            className="absolute w-[800px] h-[800px] rounded-full blur-3xl opacity-30 pointer-events-none"
             style={{
               background: "radial-gradient(circle, #D0FF71 0%, transparent 70%)",
             }}
           />
 
-          {/* 3D Card Mockup */}
+          {/* Simple Card Mockup */}
           <div
-            className="mockup relative rounded-3xl overflow-hidden transition-transform duration-300"
+            className="relative rounded-3xl overflow-hidden w-full"
             style={{
-              width: "380px",
-              height: "500px",
+              maxWidth: "1200px",
+              height: "800px",
               background: "linear-gradient(135deg,#141414,#1c1c1c)",
               border: "1px solid rgba(255,255,255,0.08)",
               boxShadow: "0 40px 80px rgba(0,0,0,0.7)",
-              transformStyle: "preserve-3d",
-              transform: "rotateX(10deg)",
             }}
           >
-            <img
-              src="/3d-preview.png" 
-              alt="3D Landing Page Preview"
-              className="w-full h-full object-cover"
+            <iframe
+              src="https://nishantdemo1.netlify.app"
+              title="3D Landing Page Preview"
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             />
           </div>
         </div>

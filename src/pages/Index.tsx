@@ -14,10 +14,17 @@ import PricingSection from "@/components/portfolio/PricingSection";
 import TechStackSection from "@/components/portfolio/TechStackSection";
 import ThreeDSection from "@/components/portfolio/ThreeDSection";
 import WorkflowSection from "@/components/portfolio/WorkflowSection";
+import ScrollingPortrait from "@/components/portfolio/ScrollingPortrait";
+import GlobalSpotlight from "@/components/portfolio/GlobalSpotlight";
+import VerticalProgress from "@/components/portfolio/VerticalProgress";
+
 const Index = () => {
   return (
     <>
       <CustomCursor />
+      <GlobalSpotlight />
+      <VerticalProgress />
+      <ScrollingPortrait />
       <Header />
       <main>
         <HeroSection />

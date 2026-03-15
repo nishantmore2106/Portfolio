@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ParallaxText from "./ParallaxText";
 
 const accordionServices = [
   {
@@ -66,14 +67,18 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-32 relative z-10">
+    <section id="services" className="py-32 relative overflow-hidden">
+      <ParallaxText text="SERVICES" speed={0.12} className="opacity-[0.03]" />
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ================= HEADER ================= */}
-        <div className="grid md:grid-cols-2 gap-16 items-start mb-24">
+        <div className="grid md:grid-cols-3 gap-16 items-start mb-24">
 
-          {/* Left */}
-          <div ref={ref} className="reveal">
+          {/* Left - Animation Path Clearing */}
+          <div id="portrait-services-anchor" className="hidden md:block relative h-[500px]" />
+
+          {/* Middle/Left Text */}
+          <div ref={ref} className="reveal-mask">
             <p
               className="text-xs uppercase tracking-widest mb-4"
               style={{ color: "#D0FF71" }}
@@ -84,7 +89,7 @@ export default function ServicesSection() {
             <h2
               className="text-foreground font-black uppercase leading-none mb-6"
               style={{
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
+                fontSize: "clamp(2.5rem, 5vw, 4rem)",
                 letterSpacing: "-0.03em",
                 fontFamily: "'Syne', sans-serif",
               }}

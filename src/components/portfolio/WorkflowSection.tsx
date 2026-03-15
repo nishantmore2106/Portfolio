@@ -1,164 +1,194 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 const steps = [
   {
     title: "Feature Selection & Scope Lock",
-    content:
-      "Client selects required features like authentication, database, APIs, payments, analytics and deployment. Scope is locked based on selected plan.",
+    content: "Client selects required features like authentication, database, APIs, payments, analytics and deployment. Scope is locked based on selected plan.",
+    icon: "01",
   },
   {
     title: "System Architecture Planning",
-    content:
-      "We design the architecture using Supabase, APIs, secure authentication layers and AI-generated UI strategy.",
+    content: "We design the architecture using Supabase, APIs, secure authentication layers and AI-generated UI strategy.",
+    icon: "02",
   },
   {
     title: "AI-Powered UI Development",
-    content:
-      "Responsive AI-generated landing pages built with Lovable, Framer & modern frameworks — optimized for performance and conversion.",
+    content: "Responsive AI-generated landing pages built with Lovable, Framer & modern frameworks — optimized for performance and conversion.",
+    icon: "03",
   },
   {
     title: "Backend & Integrations",
-    content:
-      "Authentication, database configuration, API integrations, payments, admin dashboards and analytics are implemented.",
+    content: "Authentication, database configuration, API integrations, payments, admin dashboards and analytics are implemented.",
+    icon: "04",
   },
   {
     title: "Security, Testing & Deployment",
-    content:
-      "Security audit, validation checks, performance optimization and production deployment.",
+    content: "Security audit, validation checks, performance optimization and production deployment.",
+    icon: "05",
   },
 ];
 
 export default function WorkflowSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [visibleSteps, setVisibleSteps] = useState<number[]>([]);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
 
-  // Scroll-trigger reveal + counter
   useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll(".workflow-card");
+    if (!api) return;
 
-      elements.forEach((el, index) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          setVisibleSteps((prev) =>
-            prev.includes(index) ? prev : [...prev, index]
-          );
-        }
-      });
-    };
+    setCurrent(api.selectedScrollSnap());
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      api?.scrollTo(index);
+    },
+    [api]
+  );
 
   return (
     <section
       id="workflow"
-      className="py-32 relative"
+      className="py-32 relative overflow-hidden"
       style={{
-        background:
-          "radial-gradient(circle at 30% 20%, rgba(208,255,113,0.06), transparent 50%), #0f0f0f",
+        background: "#0f0f0f",
       }}
     >
-      <div className="max-w-5xl mx-auto px-6 relative" ref={containerRef}>
+      {/* BACKGROUND DECORATIONS */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[120px] opacity-20"
+          style={{ background: "#D0FF71" }}
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-[120px] opacity-10"
+          style={{ background: "#D0FF71" }}
+        />
+      </div>
 
+      <div className="max-w-7xl mx-auto px-6 relative">
         {/* HEADER */}
-        <div className="text-center mb-20">
+        <div className="mb-20">
           <p
-            className="text-xs uppercase tracking-widest mb-4"
+            className="text-xs uppercase tracking-[0.3em] mb-4 font-bold"
             style={{ color: "#D0FF71" }}
           >
             Development Process
           </p>
 
           <h2
-            className="font-black uppercase leading-none"
+            className="font-black uppercase leading-[0.9] tracking-tighter"
             style={{
-              fontSize: "clamp(2.5rem, 6vw, 5rem)",
+              fontSize: "clamp(3rem, 10vw, 8rem)",
               fontFamily: "'Syne', sans-serif",
             }}
           >
             WORKFLOW
             <br />
-            SYSTEM
+            <span className="text-white/20">SYSTEM</span>
           </h2>
         </div>
 
-        {/* CONNECTING LINE */}
-        <div
-          className="absolute left-6 top-40 bottom-0 w-[2px]"
-          style={{
-            background:
-              "linear-gradient(to bottom, #D0FF71 0%, rgba(208,255,113,0.1) 100%)",
+        {/* CAROUSEL */}
+        <Carousel
+          setApi={setApi}
+          opts={{
+            align: "start",
+            loop: false,
           }}
-        />
-
-        {/* STEPS */}
-        <div className="space-y-20 relative">
-
-          {steps.map((step, index) => {
-            const isVisible = visibleSteps.includes(index);
-            const isOpen = openIndex === index;
-
-            return (
-              <div
+          className="w-full"
+          aria-label="Workflow steps carousel"
+        >
+          <CarouselContent className="-ml-4 md:-ml-8">
+            {steps.map((step, index) => (
+              <CarouselItem
                 key={index}
-                className={`workflow-card relative pl-20 transition-all duration-700 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                }`}
+                className="pl-4 md:pl-8 basis-full md:basis-[45%] lg:basis-[35%]"
+                role="group"
+                aria-label={`Step ${index + 1}: ${step.title}`}
               >
-                {/* COUNTER CIRCLE */}
                 <div
-                  className="absolute left-0 top-0 w-12 h-12 rounded-full flex items-center justify-center font-bold"
+                  className={cn(
+                    "group relative h-full rounded-[2rem] p-10 transition-all duration-500 border border-white/5",
+                    "backdrop-blur-xl bg-white/[0.02] hover:bg-white/[0.05]",
+                    current === index && "border-[#D0FF71]/30 bg-white/[0.04]"
+                  )}
                   style={{
-                    backgroundColor: "#D0FF71",
-                    color: "#0f0f0f",
-                    boxShadow: "0 0 30px rgba(208,255,113,0.4)",
+                    boxShadow: current === index 
+                      ? "0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(208,255,113,0.05)" 
+                      : "0 20px 40px rgba(0,0,0,0.2)"
                   }}
                 >
-                  {isVisible ? `0${index + 1}` : "00"}
-                </div>
+                  <div 
+                    className="text-6xl font-black mb-8 transition-colors duration-500"
+                    style={{ 
+                      fontFamily: "'Syne', sans-serif",
+                      color: current === index ? "#D0FF71" : "rgba(255,255,255,0.05)",
+                      WebkitTextStroke: current === index ? "none" : "1px rgba(255,255,255,0.1)"
+                    }}
+                  >
+                    {step.icon}
+                  </div>
 
-                {/* CARD */}
-                <div
-                  className="group rounded-3xl p-10 cursor-pointer transition-all duration-500"
-                  style={{
-                    background: "linear-gradient(135deg,#141414,#1c1c1c)",
-                    border: "1px solid rgba(255,255,255,0.06)",
-                    boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
-                    transform: isVisible
-                      ? "perspective(1000px) rotateX(0deg)"
-                      : "perspective(1000px) rotateX(20deg)",
-                  }}
-                  onClick={() =>
-                    setOpenIndex(isOpen ? null : index)
-                  }
-                >
                   <h3
-                    className="text-xl font-bold mb-4"
+                    className="text-2xl font-bold mb-6 group-hover:text-[#D0FF71] transition-colors"
                     style={{ fontFamily: "'Syne', sans-serif" }}
                   >
                     {step.title}
                   </h3>
 
-                  <div
-                    className={`transition-all duration-500 overflow-hidden ${
-                      isOpen ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <p className="text-white/60 text-sm leading-relaxed mt-4">
-                      {step.content}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+                  <p className="text-white/50 text-base leading-relaxed font-medium">
+                    {step.content}
+                  </p>
 
+                  <div className="absolute bottom-6 right-6 opacity-5 group-hover:opacity-20 transition-opacity">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true">
+                      <path d="M0 30H60M30 0V60" stroke="#D0FF71" strokeWidth="0.5" />
+                      <circle cx="30" cy="30" r="20" stroke="#D0FF71" strokeWidth="0.5" />
+                    </svg>
+                  </div>
+
+                  {current === index && (
+                    <div 
+                      className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1/2 h-1 blur-md transition-all duration-500"
+                      style={{ background: "#D0FF71", opacity: 0.6 }}
+                    />
+                  )}
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        {/* PROGRESS & NAVIGATION */}
+        <div className="mt-16 flex items-center justify-between">
+          <div className="flex gap-2">
+            {steps.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                className={cn(
+                  "h-1 transition-all duration-500 rounded-full",
+                  current === index ? "w-12 bg-[#D0FF71]" : "w-6 bg-white/10 hover:bg-white/20"
+                )}
+                aria-label={`Go to step ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          <div className="text-white/20 font-mono text-sm tracking-widest uppercase">
+            Phase <span className="text-[#D0FF71] font-bold">0{current + 1}</span> / 05
+          </div>
         </div>
       </div>
     </section>

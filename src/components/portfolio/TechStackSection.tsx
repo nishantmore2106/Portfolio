@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 const techStack = [
-  { name: "Lovable", logo: "public/lovable-color.png" },
-  { name: "Replit", logo: "public/replit-color.png" },
+  { name: "Lovable", logo: "/lovable-color.png" },
+  { name: "Replit", logo: "/replit-color.png" },
   { name: "VS Code", logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/vscode.png" },
   { name: "ChatGPT", logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/chatgpt.png" },
   { name: "Gemini", logo: "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-gemini.png" },
