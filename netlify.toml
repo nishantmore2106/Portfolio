@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Ensure smooth SPA routing for the React app
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
