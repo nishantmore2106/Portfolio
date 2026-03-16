@@ -38,15 +38,16 @@ export default function FloatingCVCard() {
 
         {/* Button */}
         <a
-          href="/Resume Nishant More.pdf"
-          download
+          href="/Nishant_More_Digital_Resume.html"
+          target="_blank"
+          rel="noopener noreferrer"
           className="ml-3 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
           style={{
             backgroundColor: "#D0FF71",
             color: "#0f0f0f",
           }}
         >
-          Download CV
+          View CV
         </a>
       </div>
     </div>

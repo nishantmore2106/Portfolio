@@ -24,13 +24,18 @@ export default function Footer() {
 
           {/* Socials */}
           <div className="flex items-center gap-6">
-            {["Twitter", "LinkedIn", "Fiverr"].map((s) => (
+            {[
+              { name: "Instagram", url: "https://www.instagram.com/itsnisahnt_21/" },
+              { name: "Fiverr", url: "#" }
+            ].map((s) => (
               <a
-                key={s}
-                href="#"
+                key={s.name}
+                href={s.url}
+                target={s.url.startsWith("http") ? "_blank" : undefined}
+                rel={s.url.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors"
               >
-                {s}
+                {s.name}
               </a>
             ))}
           </div>

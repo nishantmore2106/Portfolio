@@ -71,7 +71,7 @@ export default function AboutSection() {
           {/* Left - Portrait Landing Area */}
           <div className="relative h-[400px] md:h-[540px] w-full">
             {/* The ScrollingPortrait component will "land" here visually */}
-            <div 
+            <div
               id="portrait-about-anchor"
               className="absolute inset-0 rounded-[2.5rem] border border-white/5 bg-white/[0.02]"
               aria-hidden="true"
@@ -95,10 +95,10 @@ export default function AboutSection() {
             >
               ABOUT ME
             </h2>
-            
+
             <div className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
-                I'm Nishant More — an AI Landing Page Designer & Builder with 6
+                I'm Nishant More — an AI Landing Page Designer & Builder with 3
                 years of focused experience in crafting high-converting digital
                 experiences. I blend strategic thinking with clean visual design
                 to build pages that don't just look good — they perform.

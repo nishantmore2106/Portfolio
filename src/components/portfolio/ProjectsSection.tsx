@@ -2,6 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
+    title: "CreatorPilot",
+    tag: "AI PLATFORM",
+    description: "Transform your content ideas into scroll-stopping posts with intelligent automation designed for creators.",
+    image: "/CREATOR PILOT.png",
+    link: "https://id-preview--6e145f02-7125-4c67-a7e8-165b5939700d.lovable.app/",
+    accent: "#A855F7"
+  },
+  {
     title: "Elevate Studio",
     tag: "AI LANDING PAGE",
     description: "Premium design studio landing page.",
