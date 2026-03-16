@@ -75,7 +75,7 @@ export default function ServicesSection() {
         <div className="grid md:grid-cols-3 gap-16 items-start mb-24">
 
           {/* Left - Animation Path Clearing */}
-          <div id="portrait-services-anchor" className="hidden md:block relative h-[500px]" />
+          <div id="portrait-services-anchor" className="relative h-[200px] md:h-[500px]" />
 
           {/* Middle/Left Text */}
           <div ref={ref} className="reveal-mask">

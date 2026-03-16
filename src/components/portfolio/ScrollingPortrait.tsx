@@ -73,7 +73,7 @@ export default function ScrollingPortrait() {
     };
   }, [updateCoords]);
 
-  if (dimensions.width < 768 || !anchors) return null;
+  if (dimensions.width < 100 || !anchors) return null;
 
   // ANIMATION CONFIG
   const vwc = dimensions.width / 2;
@@ -133,8 +133,8 @@ export default function ScrollingPortrait() {
         <div 
           className="portrait-inner relative"
           style={{
-            width: "clamp(280px, 32vw, 420px)",
-            height: "clamp(360px, 42vw, 540px)",
+            width: "clamp(240px, 32vw, 420px)",
+            height: "clamp(320px, 42vw, 540px)",
             borderRadius: "3rem",
             transform: `rotateY(${rotation}deg)`,
             transformStyle: "preserve-3d",

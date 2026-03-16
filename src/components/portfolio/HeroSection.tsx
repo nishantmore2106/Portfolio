@@ -91,8 +91,8 @@ export default function HeroSection() {
               id="portrait-hero-anchor"
               className="portrait-inner relative overflow-hidden opacity-0"
               style={{
-                width: "clamp(280px, 32vw, 420px)",
-                height: "clamp(360px, 42vw, 540px)",
+                width: "clamp(240px, 32vw, 420px)",
+                height: "clamp(320px, 42vw, 540px)",
                 borderRadius: "2.5rem",
               }}
             >

@@ -69,7 +69,7 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
           {/* Left - Portrait Landing Area */}
-          <div className="hidden md:block relative h-[540px] w-full">
+          <div className="relative h-[400px] md:h-[540px] w-full">
             {/* The ScrollingPortrait component will "land" here visually */}
             <div 
               id="portrait-about-anchor"

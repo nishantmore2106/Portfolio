@@ -198,7 +198,6 @@
 
 /* ======== MOBILE — disable 3D ======== */
 @media (max-width: 767px) {
-  .portrait-inner,
   .project-card {
     transform: none !important;
     transition: none !important;
