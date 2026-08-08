@@ -2,19 +2,18 @@ import CustomCursor from "@/components/portfolio/CustomCursor";
 import Header from "@/components/portfolio/Header";
 import HeroSection from "@/components/portfolio/HeroSection";
 import ServicesSection from "@/components/portfolio/ServicesSection";
-import AboutSection from "@/components/portfolio/AboutSection";
+
 import ProjectsSection from "@/components/portfolio/ProjectsSection";
-import TestimonialsSection from "@/components/portfolio/TestimonialsSection";
+import CoreServicesSection from "@/components/portfolio/CoreServicesSection";
+
 import FAQSection from "@/components/portfolio/FAQSection";
-import BlogSection from "@/components/portfolio/BlogSection";
-import ContactSection from "@/components/portfolio/ContactSection";
+import CTASection from "@/components/portfolio/CTASection";
+import FinalImageSection from "@/components/portfolio/FinalImageSection";
+
 import Footer from "@/components/portfolio/Footer";
-import FloatingCVCard from "@/components/portfolio/FloatingCVCard";
 import PricingSection from "@/components/portfolio/PricingSection"; 
-import TechStackSection from "@/components/portfolio/TechStackSection";
-import ThreeDSection from "@/components/portfolio/ThreeDSection";
-import WorkflowSection from "@/components/portfolio/WorkflowSection";
-import ScrollingPortrait from "@/components/portfolio/ScrollingPortrait";
+import MarqueeRibbon from "@/components/portfolio/MarqueeRibbon";
+// ScrollingPortrait removed — replaced by bubble reveal hero
 import GlobalSpotlight from "@/components/portfolio/GlobalSpotlight";
 import VerticalProgress from "@/components/portfolio/VerticalProgress";
 
@@ -24,35 +23,39 @@ const Index = () => {
       <CustomCursor />
       <GlobalSpotlight />
       <VerticalProgress />
-      <ScrollingPortrait />
+
       <Header />
       <main>
         <HeroSection />
+        <MarqueeRibbon />
         <div className="section-divider" />
         <ServicesSection />
-        <div className="section-divider" />
-        <AboutSection />
-        <div className="section-divider" />
-        <ProjectsSection />
-        <div className="section-divider" />
-        <TechStackSection />
-        <div className="section-divider" />
-        <ThreeDSection />
-        <div className="section-divider" />
-        <WorkflowSection />
-        <div className="section-divider" />
+        
+        <div className="relative">
+          {/* Continuous background image across the end of Projects and all of Core Services */}
+          <img 
+            src="/assets/image copy 26.png" 
+            alt="" 
+            className="absolute bottom-0 left-0 w-full z-0 pointer-events-none object-cover object-top" 
+            style={{ height: "2200px", maxHeight: "100%" }} 
+          />
+          
+          <div className="relative z-10">
+            <ProjectsSection />
+            <CoreServicesSection />
+          </div>
+
+          {/* Blur & Color Blend into the Pricing Section */}
+          <div className="absolute bottom-[-1px] left-0 w-full h-48 pointer-events-none z-20 bg-gradient-to-b from-transparent to-[#072974] backdrop-blur-md [mask-image:linear-gradient(to_bottom,transparent,black)]" />
+        </div>
+
         <PricingSection />
-        <div className="section-divider" />
-        <TestimonialsSection />
-        <div className="section-divider" />
+
         <FAQSection />
-        <div className="section-divider" />
-        <BlogSection />
-        <div className="section-divider" />
-        <ContactSection />
+        <CTASection />
+        <FinalImageSection />
       </main>
       <Footer />
-      <FloatingCVCard />
     </>
   );
 };

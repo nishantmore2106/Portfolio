@@ -1,131 +1,97 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import FadeIn from "@/components/ui/FadeIn";
 
 export default function HeroSection() {
-  const portraitRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [scrollZ, setScrollZ] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const progress = Math.min(window.scrollY / 500, 1);
-      setScrollZ(progress * 8);
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (window.innerWidth < 768) return;
-    const rect = portraitRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / (rect.width / 2);
-    const dy = (e.clientY - cy) / (rect.height / 2);
-    setTilt({ x: dy * -6, y: dx * 6 });
-  };
-
-  const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  // Smoothly zoom in the image as the user scrolls down
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      ref={containerRef}
+      className="relative w-full overflow-hidden flex flex-col pt-0 md:pt-16 min-h-[100vh] md:min-h-[125vh]"
     >
-      {/* Background words */}
-      <span className="bg-word" style={{ left: "-2%", top: "30%", fontFamily: "'Syne', sans-serif" }}>
-        WEB
-      </span>
-      <span className="bg-word" style={{ right: "-2%", top: "30%", fontFamily: "'Syne', sans-serif" }}>
-        DESIGNER
-      </span>
+      {/* Static Background Image with Scroll Zoom */}
+      <motion.img
+        style={{ scale }}
+        src="/assets/image copy 23.png"
+        alt="Hero Background"
+        className="absolute inset-0 w-full h-full object-cover z-0 origin-center"
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-        {/* Top headline */}
-        <div className="text-center mb-10">
-          <h1
-            className="text-foreground font-black uppercase leading-none mb-6"
-            style={{
-              fontSize: "clamp(1.5rem, 4vw, 3.5rem)",
-              letterSpacing: "-0.03em",
-              fontFamily: "'Syne', sans-serif",
-            }}
-          >
-            Nishant builds high-converting
-            <br />
-            <span style={{ color: "#D0FF71" }}>AI landing pages</span> &amp; digital systems.
-          </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-            AI Landing Page Designer &amp; Builder focused on clarity, structure,
-            and scalable web architecture.
+      {/* Static Pill Cards (No floating animation) */}
+      <FadeIn delay={0.2} direction="none" className="absolute top-[45%] md:top-[45%] -left-8 sm:-left-4 md:left-1/2 md:-translate-x-[180%] lg:-translate-x-[220%] -rotate-[15deg] z-10 pointer-events-none">
+        <div className="bg-white rounded-full px-4 py-2 md:px-8 md:py-4 shadow-xl">
+          <span className="text-[#1a1a1a] font-medium text-xs md:text-lg whitespace-nowrap tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>Web design</span>
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={0.3} direction="none" className="absolute top-[55%] md:top-[20%] -right-8 sm:-right-4 md:right-auto md:left-1/2 md:translate-x-[80%] lg:translate-x-[120%] rotate-[15deg] z-10 pointer-events-none">
+        <div className="bg-white rounded-full px-4 py-2 md:px-8 md:py-4 shadow-xl">
+          <span className="text-[#1a1a1a] font-medium text-xs md:text-lg whitespace-nowrap tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>Web design</span>
+        </div>
+      </FadeIn>
+
+      {/* Content Area: Text (Left/Top) & Cards (Right/Bottom) */}
+      <div className="relative flex-1 w-full px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between md:items-end z-30 pointer-events-auto pt-24 md:pt-32 pb-8 md:pb-[10vh]">
+        
+        {/* Left Side: Hero Text */}
+        <FadeIn direction="up" delay={0.1} className="flex flex-col gap-2 max-w-2xl mb-auto md:mb-0">
+          <p className="text-gray-800 font-medium text-lg md:text-xl" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Hi, I'm Nishant.
           </p>
-        </div>
+          <h1 className="text-[#1a1a1a] font-black text-[2rem] sm:text-[2.5rem] md:text-6xl lg:text-7xl leading-[1.05] tracking-tight" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>
+            Web Designer,<br className="hidden md:block" /> UI/UX & Landing<br className="hidden md:block" /> Page Designer
+          </h1>
+        </FadeIn>
 
-        {/* Portrait + Accent bubble */}
-        <div className="relative flex justify-center items-center mb-10">
-          {/* Accent Hi bubble */}
-          <div
-            className="absolute z-20 flex items-center justify-center w-16 h-16 rounded-full font-bold text-sm"
-            style={{
-              backgroundColor: "#D0FF71",
-              color: "#0f0f0f",
-              top: "-18px",
-              left: "calc(50% + 120px)",
-              fontSize: "0.7rem",
-              letterSpacing: "0.05em",
-              fontFamily: "'Syne', sans-serif",
-              transform: "rotate(12deg)",
-            }}
-          >
-            <div className="text-center leading-tight">
-              <div className="text-lg">👋</div>
-              <div>Hi!</div>
+        {/* Right Side: Stats Cards */}
+        <div className="flex flex-col gap-4 w-full md:w-auto md:min-w-[320px] mt-auto md:mt-0 relative z-40">
+          {/* Main Card */}
+          <FadeIn direction="up" delay={0.2} className="bg-white rounded-[24px] p-6 flex justify-between items-center shadow-2xl transform transition-transform hover:scale-[1.02] w-full">
+            <div className="flex flex-col text-left">
+              <span className="text-gray-500 font-medium text-sm md:text-base leading-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Years Crafting</span>
+              <span className="text-gray-500 font-medium text-sm md:text-base leading-tight" style={{ fontFamily: "'Inter', sans-serif" }}>Digital Products</span>
             </div>
-          </div>
+            <span className="text-gray-900 font-black text-4xl md:text-5xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>3+</span>
+          </FadeIn>
 
-          {/* Portrait Placeholder (ScrollingPortrait will overlap this exactly at scrollY=0) */}
-          <div className="portrait-wrapper">
-            <div
-              id="portrait-hero-anchor"
-              className="portrait-inner relative overflow-hidden opacity-0"
-              style={{
-                width: "clamp(240px, 32vw, 420px)",
-                height: "clamp(320px, 42vw, 540px)",
-                borderRadius: "2.5rem",
-              }}
-            >
-              {/* Image removed to prevent duplication/flicker */}
-            </div>
-          </div>
-        </div>
+          {/* Sub Cards Container */}
+          <div className="flex gap-4 w-full">
+            <FadeIn direction="up" delay={0.3} className="bg-white rounded-[24px] p-4 flex flex-col items-center justify-center flex-1 shadow-2xl transform transition-transform hover:scale-[1.05]">
+              <span className="text-gray-500 font-medium text-xs sm:text-sm mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>Projects</span>
+              <span className="text-gray-900 font-black text-2xl sm:text-3xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>50+</span>
+            </FadeIn>
 
-        {/* Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#contact"
-            className="inline-flex items-center px-7 py-3.5 rounded-full font-semibold text-sm uppercase tracking-wide transition-opacity hover:opacity-85"
-            style={{ backgroundColor: "#D0FF71", color: "#0f0f0f" }}
-          >
-            Start a Project
-          </a>
-          <a
-            href="#projects"
-            className="inline-flex items-center px-7 py-3.5 rounded-full font-semibold text-sm uppercase tracking-wide border border-border text-foreground hover:border-accent transition-colors"
-          >
-            View Work
-          </a>
-          <a
-            href="https://fiverr.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-sm uppercase tracking-wide border border-border text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
-          >
-            Hire Me on Fiverr ↗
-          </a>
+            <FadeIn direction="up" delay={0.4} className="bg-[#111] rounded-[24px] p-4 flex flex-col items-center justify-center flex-1 shadow-2xl transform transition-transform hover:scale-[1.05]">
+              <span className="text-gray-400 font-medium text-xs sm:text-sm mb-1" style={{ fontFamily: "'Inter', sans-serif" }}>Clients</span>
+              <span className="text-white font-black text-2xl sm:text-3xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>20+</span>
+            </FadeIn>
+          </div>
         </div>
       </div>
+
+
+
+
+
+      {/* Blur / Gradient Blend into Section 2 */}
+      <div 
+        className="absolute bottom-0 left-0 w-full h-[25vh] z-20 pointer-events-none"
+        style={{
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          maskImage: "linear-gradient(to bottom, transparent, black 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 100%)"
+        }}
+      />
     </section>
   );
 }

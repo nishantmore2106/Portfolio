@@ -1,207 +1,166 @@
-import { useState } from "react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import ParallaxText from "./ParallaxText";
-
-const accordionServices = [
-  {
-    number: "01",
-    title: "AI GENERATED LANDING PAGES",
-    items: [
-      "AI-assisted high-quality UI generation",
-      "Conversion-focused layout structure",
-      "Performance optimized design",
-      "Mobile-first responsive build",
-    ],
-  },
-  {
-    number: "02",
-    title: "UI / UX SYSTEM DESIGN",
-    items: [
-      "Structured user journey mapping",
-      "Conversion hierarchy planning",
-      "Trust & CTA positioning",
-      "Clear messaging architecture",
-    ],
-  },
-  {
-    number: "03",
-    title: "AUTHENTICATION SYSTEMS",
-    items: [
-      "Login / Signup flows",
-      "Role-based access control",
-      "Firebase / Supabase integration",
-      "Secure session handling",
-    ],
-  },
-  {
-    number: "04",
-    title: "DATABASE & STORAGE",
-    items: [
-      "Database configuration",
-      "Cloud storage setup",
-      "Scalable architecture planning",
-      "Structured data modeling",
-    ],
-  },
-];
-
-const featureCards = [
-  "API Integration",
-  "Database Configuration",
-  "Authentication Setup",
-  "On-page SEO Setup",
-  "Analytics Integration",
-  "Payment Gateway Integration",
-  "Deployment & Hosting Setup",
-  "Admin Dashboard Screens",
-  "Security & Compliance Audit",
-  "Custom Screens / Feature Development",
-];
+import FadeIn from "@/components/ui/FadeIn";
+import { useContactModal } from "@/context/ContactModalContext";
 
 export default function ServicesSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { ref } = useScrollReveal();
-
-  const toggle = (i: number) => {
-    setOpenIndex(openIndex === i ? null : i);
-  };
-
+  const { openModal } = useContactModal();
   return (
-    <section id="services" className="py-32 relative overflow-hidden">
-      <ParallaxText text="SERVICES" speed={0.12} className="opacity-[0.03]" />
-      <div className="max-w-7xl mx-auto px-6">
+    <section 
+      id="about" 
+      className="pt-16 pb-16 md:pt-24 md:pb-[40rem] lg:pb-[45rem] bg-[#f0f3f8] min-h-[110vh] md:min-h-[155vh] flex flex-col md:flex-row items-start relative overflow-hidden"
+    >
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-start gap-12 md:gap-24 relative z-20">
+        
+        {/* Left Side: Tag */}
+        <FadeIn direction="right" delay={0.1} className="flex items-center gap-2 text-gray-800 shrink-0 mt-3">
+          {/* Blue Star Icon */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8 2.3-7.4-6-4.6h7.6z" />
+          </svg>
+          <span className="font-semibold text-lg tracking-wide text-gray-700" style={{ fontFamily: "'Inter', sans-serif" }}>About Me</span>
+        </FadeIn>
 
-        {/* ================= HEADER ================= */}
-        <div className="grid md:grid-cols-3 gap-16 items-start mb-24">
-
-          {/* Left - Animation Path Clearing */}
-          <div id="portrait-services-anchor" className="relative h-[200px] md:h-[500px]" />
-
-          {/* Middle/Left Text */}
-          <div ref={ref} className="reveal-mask">
-            <p
-              className="text-xs uppercase tracking-widest mb-4"
-              style={{ color: "#D0FF71" }}
+        {/* Right Side: Content */}
+        <div className="flex flex-col gap-10 max-w-4xl">
+          {/* Headline Text */}
+          <FadeIn direction="right" delay={0.2}>
+            <h2 
+              className="text-[1.25rem] sm:text-[1.5rem] md:text-[1.75rem] lg:text-[2.25rem] font-medium text-gray-900 leading-[1.3] tracking-tight" 
+              style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Services
-            </p>
-
-            <h2
-              className="text-foreground font-black uppercase leading-none mb-6"
-              style={{
-                fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                letterSpacing: "-0.03em",
-                fontFamily: "'Syne', sans-serif",
-              }}
-            >
-              DIGITAL SYSTEMS
-              <br />
-              I BUILD
+              I create thoughtful digital experiences that connect strategy, usability, and visual clarity to build high-converting landing pages.
             </h2>
-
-            <p className="text-muted-foreground leading-relaxed max-w-sm">
-              I design and develop AI-powered landing pages and full digital
-              systems engineered for clarity, performance, scalability, and
-              conversion.
-            </p>
-          </div>
-
-          {/* Right — Accordion */}
-          <div className="divide-y divide-border">
-            {accordionServices.map((service, i) => (
-              <div key={i} className="py-6">
-                <button
-                  className="w-full flex items-center justify-between gap-4 text-left group"
-                  onClick={() => toggle(i)}
-                  data-cursor-hover
-                >
-                  <div className="flex items-baseline gap-4">
-                    <span
-                      className="text-xs font-mono"
-                      style={{ color: "#D0FF71" }}
-                    >
-                      {service.number}
-                    </span>
-
-                    <span
-                      className="font-bold text-foreground group-hover:text-accent transition-colors"
-                      style={{
-                        fontSize: "clamp(0.9rem, 2vw, 1.1rem)",
-                        fontFamily: "'Syne', sans-serif",
-                        letterSpacing: "0.02em",
-                      }}
-                    >
-                      {service.title}
-                    </span>
-                  </div>
-
-                  <div
-                    className={`service-arrow ${
-                      openIndex === i ? "open" : ""
-                    }`}
-                  />
-                </button>
-
-                <div
-                  className={`service-accordion-content ${
-                    openIndex === i ? "open" : ""
-                  }`}
-                >
-                  <ul className="pt-5 pb-2 pl-10 space-y-3">
-                    {service.items.map((item, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-3 text-muted-foreground text-sm"
-                      >
-                        <span
-                          style={{ color: "#D0FF71", marginTop: "2px" }}
-                        >
-                          →
-                        </span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ================= FEATURE CARDS GRID ================= */}
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {featureCards.map((feature, i) => (
-            <div
-              key={i}
-              className="rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2"
-              style={{
-                background:
-                  "linear-gradient(135deg, #141414 0%, #1c1c1c 100%)",
-                border: "1px solid rgba(255,255,255,0.06)",
-                boxShadow: "0 30px 60px rgba(0,0,0,0.6)",
-              }}
-              data-cursor-hover
-            >
-              <div
-                className="text-sm font-bold uppercase mb-4"
-                style={{ color: "#D0FF71", fontFamily: "'Syne', sans-serif" }}
+          </FadeIn>
+          
+          {/* CTA Buttons */}
+          <FadeIn direction="right" delay={0.3}>
+            <div className="flex items-center gap-3 mt-4 justify-center md:justify-start">
+              <button 
+                onClick={() => openModal()}
+                className="bg-[#111111] hover:bg-black text-white px-8 py-4 rounded-full font-medium transition-transform hover:scale-105 shadow-xl"
+                style={{ fontFamily: "'Inter', sans-serif" }}
               >
-                Feature
-              </div>
-
-              <h3
-                className="text-foreground font-bold leading-snug"
-                style={{
-                  fontFamily: "'Syne', sans-serif",
-                  fontSize: "1.1rem",
-                }}
+                Get In Touch
+              </button>
+              <button 
+                onClick={() => openModal()}
+                className="w-[56px] h-[56px] rounded-full bg-[#111111] hover:bg-black text-white flex justify-center items-center transition-transform hover:scale-105 shadow-xl"
               >
-                {feature}
-              </h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
             </div>
-          ))}
+          </FadeIn>
         </div>
+
+      </div>
+
+      {/* Portrait Image at Bottom Left */}
+      <FadeIn direction="up" delay={0.2} className="relative md:absolute mt-12 md:mt-0 md:bottom-12 md:left-8 lg:left-24 w-full md:w-[50%] lg:w-[550px] max-w-[600px] z-0 pointer-events-none self-center md:self-auto">
+        <img 
+          src="/assets/image copy 25.png" 
+          alt="Portrait" 
+          className="w-[95%] mx-auto md:w-full h-auto object-contain object-bottom" 
+        />
+        {/* Bottom Fade to blend into background */}
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f0f3f8] via-[#f0f3f8]/80 to-transparent pointer-events-none" />
+      </FadeIn>
+
+      {/* Grid Cards at Bottom Right */}
+      <div className="relative md:absolute mt-8 md:mt-0 md:bottom-16 md:right-8 lg:right-12 z-10 w-full px-6 md:px-0 md:max-w-[850px] grid grid-cols-1 sm:grid-cols-2 gap-6">
+        
+        {/* Card 1 */}
+        <FadeIn direction="up" delay={0.1} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Years Crafting</span>
+            <span className="text-gray-500 font-medium text-base">Digital Products</span>
+          </div>
+          <span className="text-gray-900 font-black text-5xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>3+</span>
+        </FadeIn>
+
+        {/* Card 2 */}
+        <FadeIn direction="up" delay={0.2} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Successful</span>
+            <span className="text-gray-500 font-medium text-base">Projects Delivered</span>
+          </div>
+          <span className="text-gray-900 font-black text-5xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>20+</span>
+        </FadeIn>
+
+        {/* Card 3: Client Satisfaction */}
+        <FadeIn direction="up" delay={0.3} className="bg-white rounded-[1.5rem] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] flex flex-col justify-between h-[220px]">
+          <div>
+            <span className="text-gray-900 font-black text-4xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>5+</span>
+            <p className="text-gray-500 font-medium text-base mt-2">Happy Client<br />Partnerships</p>
+          </div>
+          <div className="flex items-center gap-2 mt-4 bg-gray-50 w-fit px-4 py-2 rounded-full border border-gray-100">
+            <span className="text-yellow-400 text-xl leading-none">★</span>
+            <span className="font-semibold text-gray-800 text-base">5.0</span>
+          </div>
+        </FadeIn>
+
+        {/* Card 4: Skills Pills */}
+        <FadeIn direction="up" delay={0.4} className="bg-white rounded-[1.5rem] p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] flex flex-col justify-between h-[220px] overflow-hidden relative">
+          <h3 className="text-gray-900 font-bold text-xl leading-tight w-3/4" style={{ fontFamily: "'Inter', sans-serif" }}>
+            Strategic Thinking,<br />Clean Execution
+          </h3>
+          <div className="flex flex-col gap-2 mt-4">
+            <div className="bg-gray-100 text-gray-600 text-sm font-semibold px-4 py-2 rounded-full w-fit">UI/UX Design</div>
+            <div className="bg-gray-100 text-gray-600 text-sm font-semibold px-4 py-2 rounded-full w-fit">Landing Pages</div>
+          </div>
+          <div className="absolute -right-4 bottom-8 bg-gray-100 text-gray-600 text-sm font-semibold px-6 py-2 rounded-full -rotate-45 shadow-sm border border-white">
+            AI Powered
+          </div>
+        </FadeIn>
+
+        {/* Card 5: Available */}
+        <FadeIn direction="up" delay={0.5} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Available For</span>
+            <span className="text-gray-500 font-medium text-base">New Opportunities</span>
+          </div>
+          <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+            <div className="w-4 h-4 bg-green-500 rounded-full animate-pulse" />
+          </div>
+        </FadeIn>
+
+        {/* Card 6: Design Quality */}
+        <FadeIn direction="up" delay={0.6} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Pixel-Perfect</span>
+            <span className="text-gray-500 font-medium text-base">Execution</span>
+          </div>
+          <span className="text-gray-900 font-black text-5xl" style={{ fontFamily: "'Maxine Sans Heavy', sans-serif" }}>100%</span>
+        </FadeIn>
+
+        {/* Card 7: Speed & Performance */}
+        <FadeIn direction="up" delay={0.7} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Lightning Fast</span>
+            <span className="text-gray-500 font-medium text-base">Performance</span>
+          </div>
+          <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+        </FadeIn>
+
+        {/* Card 8: Code Quality */}
+        <FadeIn direction="up" delay={0.8} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
+          <div className="flex flex-col">
+            <span className="text-gray-500 font-medium text-base">Clean & Scalable</span>
+            <span className="text-gray-500 font-medium text-base">Architecture</span>
+          </div>
+          <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+        </FadeIn>
+        
       </div>
     </section>
   );

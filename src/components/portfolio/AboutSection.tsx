@@ -1,126 +1,62 @@
-import { useEffect, useRef, useState } from "react";
-import ParallaxText from "./ParallaxText";
-
-function useCounter(target: number, duration: number = 1800) {
-  const [count, setCount] = useState(0);
-  const [started, setStarted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) setStarted(true);
-      },
-      { threshold: 0.5 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [started]);
-
-  useEffect(() => {
-    if (!started) return;
-    let start = 0;
-    const step = target / (duration / 16);
-    const interval = setInterval(() => {
-      start += step;
-      if (start >= target) {
-        setCount(target);
-        clearInterval(interval);
-      } else {
-        setCount(Math.floor(start));
-      }
-    }, 16);
-    return () => clearInterval(interval);
-  }, [started, target, duration]);
-
-  return { count, ref };
-}
-
-function StatCard({
-  target,
-  suffix = "",
-  label,
-}: {
-  target: number;
-  suffix?: string;
-  label: string;
-}) {
-  const { count, ref } = useCounter(target);
-
-  return (
-    <div ref={ref} className="text-center md:text-left">
-      <div className="counter-number">
-        {count}
-        <span style={{ color: "#D0FF71" }}>{suffix}</span>
-      </div>
-      <p className="text-muted-foreground text-sm uppercase tracking-widest mt-2">
-        {label}
-      </p>
-    </div>
-  );
-}
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      // Slow down the video playback speed (0.5 = half speed)
+      videoRef.current.playbackRate = 0.5;
+    }
+  }, []);
+
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      <ParallaxText text="ABOUT" speed={0.15} className="opacity-[0.03]" top="10%" />
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center mb-20">
-          {/* Left - Portrait Landing Area */}
-          <div className="relative h-[400px] md:h-[540px] w-full">
-            {/* The ScrollingPortrait component will "land" here visually */}
-            <div
-              id="portrait-about-anchor"
-              className="absolute inset-0 rounded-[2.5rem] border border-white/5 bg-white/[0.02]"
-              aria-hidden="true"
-            />
-          </div>
-
-          <div>
-            <p
-              className="text-xs uppercase tracking-widest mb-4"
-              style={{ color: "#D0FF71" }}
-            >
-              About
-            </p>
-            <h2
-              className="text-foreground font-black uppercase leading-none mb-6"
-              style={{
-                fontSize: "clamp(2.5rem, 6vw, 5rem)",
-                letterSpacing: "-0.03em",
-                fontFamily: "'Syne', sans-serif",
-              }}
-            >
-              ABOUT ME
-            </h2>
-
-            <div className="space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                I'm Nishant More — an AI Landing Page Designer & Builder with 3
-                years of focused experience in crafting high-converting digital
-                experiences. I blend strategic thinking with clean visual design
-                to build pages that don't just look good — they perform.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                From early-stage startups to established brands, I've helped
-                clients across the globe build landing pages and digital systems
-                that drive real results. My approach is methodical: understand
-                the user, map the journey, and design for conversion.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats row */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 pt-12"
-          style={{ borderTop: "1px solid hsl(var(--border))" }}
-        >
-          <StatCard target={3} label="Years Experience" />
-          <StatCard target={10} label="Completed Projects" />
-          <StatCard target={5} suffix="+" label="Clients " />
+    <section 
+      id="about" 
+      className="relative w-full flex flex-col items-center justify-start overflow-hidden bg-black"
+    >
+      {/* Video Container with Overlaid Text */}
+      <div className="relative w-full h-[90vh] md:h-[115vh] flex items-center justify-center">
+        <video 
+          ref={videoRef}
+          src="/assets/animo-spiral-stream-720p (3).webm" 
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        />
+        
+        {/* TechStack Text Overlay - No Background */}
+        <div className="relative z-20 w-full flex flex-col items-center justify-center px-4 pointer-events-none mix-blend-difference -translate-y-20 md:-translate-y-40">
+          <motion.p 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 0.6, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-white text-center tracking-[0.3em] uppercase mb-2 md:mb-4 max-w-[90vw] md:max-w-[70vw] mx-auto leading-relaxed"
+            style={{ 
+              fontFamily: "'Maxine Sans Heavy', sans-serif",
+              fontSize: "clamp(0.55rem, 1vw, 0.9rem)"
+            }}
+          >
+            CHATGPT • GEMINI • ANTIGRAVITY • GOOGLE LABS • CLAUDE • FRAMER • NODE.JS • TAILWIND • REACT • SUPABASE
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 100, scale: 0.9 }}
+            whileInView={{ opacity: 0.9, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="text-white text-center leading-[0.8] tracking-tighter w-full"
+            style={{ 
+              fontFamily: "'Maxine Sans Heavy', sans-serif",
+              fontSize: "clamp(3rem, 12vw, 25rem)", 
+              whiteSpace: "nowrap"
+            }}
+          >
+            TechStack
+          </motion.h2>
         </div>
       </div>
     </section>

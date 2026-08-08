@@ -1,98 +1,114 @@
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { useContactModal } from "@/context/ContactModalContext";
 
-const navLinks = ["Home", "About", "Projects", "Blogs"];
-
-function RollLink({ label, href }: { label: string; href: string }) {
-  return (
-    <a href={href} className="roll-link text-sm font-medium tracking-wide">
-      <div className="roll-wrap">
-        <span>{label}</span>
-        <span style={{ color: "#D0FF71" }}>{label}</span>
-      </div>
-    </a>
-  );
-}
+const menuLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "FAQ", href: "#faq" },
+  { name: "Services", href: "#services" },
+];
 
 export default function Header() {
-  const [compact, setCompact] = useState(false);
-  const lastScroll = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const current = window.scrollY;
-
-      if (current > lastScroll.current && current > 100) {
-        // scrolling DOWN
-        setCompact(true);
-      } else {
-        // scrolling UP
-        setCompact(false);
-      }
-
-      lastScroll.current = current;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { openModal } = useContactModal();
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div
-        className={`relative flex items-center transition-all duration-1200 ease-[cubic-bezier(.16,1,.3,.36,1)]
-        bg-black/75 backdrop-blur-xl shadow-2xl rounded-full border border-white/10
-        ${compact ? "px-5 py-2 gap-4" : "px-6 py-3 gap-8"}
-        `}
-      >
-        {/* PROFILE IMAGE (ALWAYS VISIBLE) */}
-        <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20 shrink-0">
-          <img
-            src="/potrait (2).png"
-            alt="Nishant"
-            className="w-full h-full object-cover"
-          />
-        </div>
-
-        {/* FULL NAVIGATION */}
-        <div
-          className={`flex items-center transition-all duration-500 ease-in-out
-          ${compact 
-            ? "opacity-0 scale-95 pointer-events-none absolute"
-            : "opacity-100 scale-100 pointer-events-auto relative"}
-          `}
-        >
-          <nav className="hidden md:flex items-center gap-8 text-white whitespace-nowrap">
-            {navLinks.map((link) => (
-              <RollLink
-                key={link}
-                label={link}
-                href={`#${link.toLowerCase()}`}
-              />
-            ))}
-          </nav>
-
-          <a
-            href="#contact"
-            className="ml-6 px-6 py-2.5 rounded-full text-sm font-medium bg-white text-black hover:bg-[#D0FF71] transition-all duration-300"
-          >
-            Contact
-          </a>
-        </div>
-
-        {/* COMPACT STATE (Available for Work) */}
-        <div
-          className={`flex items-center transition-all duration-500 ease-in-out whitespace-nowrap
-          ${compact 
-            ? "opacity-100 translate-x-0"
-            : "opacity-0 -translate-x-4 pointer-events-none absolute"}
-          `}
-        >
-          <span className="text-white text-sm font-medium flex items-center gap-3">
-            Available for work
-            <span className="w-2.5 h-2.5 bg-[#D0FF71] rounded-full animate-pulse"></span>
-          </span>
-        </div>
+    <header className="fixed top-0 left-0 w-full px-6 md:px-12 py-6 z-[100] flex justify-between items-center bg-transparent pointer-events-none">
+      
+      {/* Left Box: Logo */}
+      <div className="flex items-center gap-1 cursor-pointer pointer-events-auto">
+        <img 
+          src="/assets/image copy 36.png" 
+          alt="Nishant Logo" 
+          className="w-[72px] h-[72px] object-contain"
+        />
+        <span className="bg-white text-black px-3 py-1 rounded-lg font-semibold text-xl tracking-tight mix-blend-difference shadow-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
+          Nishant
+        </span>
       </div>
+
+      {/* Center: Nav Links */}
+      <nav className="hidden lg:flex items-center gap-8 pointer-events-auto bg-white/40 backdrop-blur-md px-8 py-3 rounded-full border border-white/40 shadow-sm">
+        {menuLinks.map((link, i) => (
+          <a 
+            key={link.name} 
+            href={link.href}
+            className={`font-medium text-[15px] transition-colors ${i === 0 ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+
+      {/* Right: CTA Button */}
+      <div className="flex items-center gap-2 pointer-events-auto">
+        <button 
+          onClick={() => openModal()}
+          className="hidden md:flex items-center justify-center bg-[#111111] hover:bg-black text-white px-7 py-3 rounded-full font-medium text-[15px] transition-colors shadow-lg"
+          style={{ fontFamily: "'Inter', sans-serif" }}
+        >
+          Get In Touch
+        </button>
+        <button 
+          onClick={() => openModal()}
+          className="hidden md:flex w-12 h-12 items-center justify-center bg-[#111111] hover:bg-black text-white rounded-full transition-colors shadow-lg"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        {/* Mobile Menu Button */}
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="md:hidden w-12 h-12 flex items-center justify-center bg-[#111111] hover:bg-black text-white rounded-full transition-colors shadow-lg"
+        >
+          {isMenuOpen ? (
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+               <line x1="18" y1="6" x2="6" y2="18"></line>
+               <line x1="6" y1="6" x2="18" y2="18"></line>
+             </svg>
+          ) : (
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+               <line x1="3" y1="12" x2="21" y2="12"></line>
+               <line x1="3" y1="6" x2="21" y2="6"></line>
+               <line x1="3" y1="18" x2="21" y2="18"></line>
+             </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="absolute top-[85px] left-6 right-6 bg-white/95 backdrop-blur-xl rounded-[1.5rem] p-6 shadow-2xl border border-gray-100 md:hidden pointer-events-auto flex flex-col gap-4 z-[110]">
+          {menuLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="font-medium text-lg text-gray-800 hover:text-blue-600 transition-colors"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              {link.name}
+            </a>
+          ))}
+          <button 
+            onClick={() => {
+              setIsMenuOpen(false);
+              openModal();
+            }}
+            className="mt-4 flex items-center justify-center bg-[#111111] text-white px-7 py-3 rounded-full font-medium text-[15px] shadow-lg w-fit"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            Get In Touch
+          </button>
+        </div>
+      )}
+      
     </header>
   );
 }

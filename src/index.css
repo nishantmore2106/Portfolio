@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: 'Maxine Sans Heavy';
+  src: url('/maxine-sans-heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 6%;
@@ -55,6 +66,36 @@
     @apply border-border;
     backface-visibility: hidden;
   }
+
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 40s linear infinite;
+  width: max-content;
+  display: flex;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 40s linear infinite;
+  width: max-content;
+  display: flex;
+}
 
   html {
     scroll-behavior: smooth;

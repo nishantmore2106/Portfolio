@@ -1,0 +1,17 @@
+.scroll-reveal {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.scroll-reveal-text {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+  row-gap: 0.1em;
+}
+
+.word {
+  display: inline-block;
+  will-change: opacity, filter;
+}

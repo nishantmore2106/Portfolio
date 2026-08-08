@@ -1,16 +1,13 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-
 import { useNavigate } from "react-router-dom";
-
-
-
+import FadeIn from "@/components/ui/FadeIn";
 
 const plans = [
   {
     name: "BASIC",
     subtitle: "AI Landing Page",
     price: "₹14,999",
-    delivery: "5 – 7 Days",
+    delivery: "Delivery: 5 – 7 Days",
+    description: "Perfect for startups needing a fast, high-converting landing page.",
     features: [
       "1 High-Converting Landing Page",
       "AI Generated UI Structure",
@@ -26,7 +23,8 @@ const plans = [
     name: "STANDARD",
     subtitle: "Growth Website System",
     price: "₹29,999",
-    delivery: "10 – 14 Days",
+    delivery: "Delivery: 10 – 14 Days",
+    description: "For scaling brands seeking advanced UX architecture and continuous iteration.",
     features: [
       "Up to 5 Pages Website",
       "Custom UI / UX Architecture",
@@ -43,7 +41,8 @@ const plans = [
     name: "PREMIUM",
     subtitle: "Full AI Digital System",
     price: "Custom Quote",
-    delivery: "2 – 4 Weeks",
+    delivery: "Delivery: 2 – 4 Weeks",
+    description: "Comprehensive end-to-end digital solutions for established enterprises.",
     features: [
       "Full Website (5–10 Pages)",
       "Advanced AI Integrations",
@@ -59,134 +58,144 @@ const plans = [
 ];
 
 export default function PricingSection() {
-  const { ref } = useScrollReveal();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <section id="pricing" className="py-32 relative z-10">
-      <div className="max-w-7xl mx-auto px-6">
+    <section 
+      id="pricing" 
+      className="py-24 md:py-32 relative overflow-hidden bg-[#072974]"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
 
         {/* Header */}
-        <div ref={ref} className="reveal mb-20 text-center">
-          <p
-            className="text-xs uppercase tracking-widest mb-4"
-            style={{ color: "#D0FF71" }}
-          >
-            Pricing
-          </p>
+        <FadeIn direction="up" className="mb-16 md:mb-24 flex flex-col items-center text-center">
+          <div className="flex items-center gap-2 mb-4">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4b7cfb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8 2.3-7.4-6-4.6h7.6z"/>
+            </svg>
+            <span className="text-blue-200 font-medium text-sm md:text-base tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>Pricing Plans</span>
+          </div>
 
           <h2
-            className="text-foreground font-black uppercase leading-none mb-6"
-            style={{
-              fontSize: "clamp(2.5rem, 6vw, 5rem)",
-              letterSpacing: "-0.03em",
-              fontFamily: "'Syne', sans-serif",
-            }}
+            className="text-white font-semibold text-3xl md:text-5xl lg:text-6xl tracking-tight max-w-2xl"
+            style={{ fontFamily: "'Inter', sans-serif", lineHeight: 1.15 }}
           >
-            INVEST IN
-            <br />
-            PERFORMANCE
+            Flexible design support<br />for growing brands
           </h2>
-
-          <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
-            Flexible packages designed for founders, AI startups, and businesses
-            ready to build high-converting digital systems.
-          </p>
-        </div>
+        </FadeIn>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className="relative rounded-3xl p-10 transition-all duration-300 hover:-translate-y-3"
-              style={{
-                background: plan.highlighted
-                  ? "linear-gradient(135deg, #1c1c1c 0%, #222222 100%)"
-                  : "linear-gradient(135deg, #141414 0%, #1c1c1c 100%)",
-                border: plan.highlighted
-                  ? "1px solid #D0FF71"
-                  : "1px solid rgba(255,255,255,0.06)",
-                boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
-              }}
-              data-cursor-hover
-            >
-              {plan.highlighted && (
-                <div
-                  className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase"
-                  style={{
-                    backgroundColor: "#D0FF71",
-                    color: "#0f0f0f",
-                  }}
-                >
-                  Most Popular
-                </div>
-              )}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          {plans.map((plan, i) => {
+            const isLight = plan.highlighted;
+            
+            if (isLight) {
+              // Light Card matching the reference
+              return (
+                <FadeIn key={i} direction="up" delay={0.1 + i * 0.1} className="bg-white rounded-[2rem] p-4 flex flex-col relative h-full shadow-2xl">
+                  <div className="bg-[#f0f3f8] rounded-[1.5rem] p-6 mb-6">
+                    <div className="flex justify-between items-start mb-4">
+                      <span className="text-gray-600 font-medium text-sm md:text-base" style={{ fontFamily: "'Inter', sans-serif" }}>{plan.name}</span>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4b7cfb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8 2.3-7.4-6-4.6h7.6z"/>
+                      </svg>
+                    </div>
+                    <div className="mb-4 flex items-baseline gap-1">
+                      <span className="text-gray-900 font-bold text-4xl xl:text-[2.75rem] tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{plan.price}</span>
+                    </div>
+                    <p className="text-gray-500 text-sm md:text-[15px] leading-relaxed max-w-[90%] mb-2" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {plan.description}
+                    </p>
+                    <p className="text-gray-700 font-semibold text-sm md:text-[15px]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                      {plan.delivery}
+                    </p>
+                  </div>
 
-              <div className="mb-8">
-                <p
-                  className="text-xs uppercase tracking-widest mb-2"
-                  style={{ color: "#D0FF71" }}
-                >
-                  {plan.name}
+                  <div className="px-4 flex flex-col flex-1">
+                    <span className="text-gray-900 font-semibold text-sm md:text-base mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>What's Included:</span>
+                    <div className="flex flex-col gap-3 mb-10 flex-1">
+                      {plan.features.map((feature, j) => (
+                        <div key={j} className="flex items-start gap-3">
+                          <div className="mt-2 w-1.5 h-1.5 rounded-full shrink-0 bg-[#4b7cfb]" />
+                          <span className="text-gray-600 text-sm md:text-[15px] leading-snug" style={{ fontFamily: "'Inter', sans-serif" }}>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center gap-2 mt-auto pb-2">
+                      <button
+                        onClick={() => navigate(`/onboarding?plan=${plan.name}`)}
+                        className="flex-1 bg-[#111111] text-white hover:bg-black transition-colors py-4 rounded-full font-medium text-sm md:text-base text-center justify-center flex"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        Get In Touch
+                      </button>
+                      <button
+                        onClick={() => navigate(`/onboarding?plan=${plan.name}`)}
+                        className="w-14 h-14 shrink-0 bg-[#111111] hover:bg-black transition-colors text-white rounded-full flex items-center justify-center"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                          <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            }
+
+            // Dark Card matching the reference
+            return (
+              <FadeIn key={i} direction="up" delay={0.1 + i * 0.1} className="bg-[#1e326c] rounded-[2rem] p-6 md:p-8 flex flex-col relative h-full shadow-lg">
+                <div className="flex justify-between items-start mb-4">
+                  <span className="text-blue-100 font-medium text-sm md:text-base" style={{ fontFamily: "'Inter', sans-serif" }}>{plan.name}</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4b7cfb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7.4-6.3-4.8-6.3 4.8 2.3-7.4-6-4.6h7.6z"/>
+                  </svg>
+                </div>
+                <div className="mb-4 flex items-baseline gap-1">
+                  <span className="text-white font-bold text-4xl xl:text-[2.75rem] tracking-tight" style={{ fontFamily: "'Inter', sans-serif" }}>{plan.price}</span>
+                </div>
+                <p className="text-gray-300 text-sm md:text-[15px] mb-2 leading-relaxed max-w-[90%]" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  {plan.description}
+                </p>
+                <p className="text-white font-semibold text-sm md:text-[15px] mb-8" style={{ fontFamily: "'Inter', sans-serif" }}>
+                  {plan.delivery}
                 </p>
 
-                <h3
-                  className="text-foreground font-bold mb-4"
-                  style={{
-                    fontFamily: "'Syne', sans-serif",
-                    fontSize: "1.4rem",
-                  }}
-                >
-                  {plan.subtitle}
-                </h3>
-
-                <div
-                  className="text-foreground font-black"
-                  style={{
-                    fontSize: "2.5rem",
-                    fontFamily: "'Syne', sans-serif",
-                  }}
-                >
-                  {plan.price}
+                <span className="text-white font-semibold text-sm md:text-base mb-4" style={{ fontFamily: "'Inter', sans-serif" }}>What's Included:</span>
+                <div className="flex flex-col gap-3 mb-10 flex-1">
+                  {plan.features.map((feature, j) => (
+                    <div key={j} className="flex items-start gap-3">
+                      <div className="mt-2 w-1.5 h-1.5 rounded-full shrink-0 bg-[#4b7cfb]" />
+                      <span className="text-gray-300 text-sm md:text-[15px] leading-snug" style={{ fontFamily: "'Inter', sans-serif" }}>{feature}</span>
+                    </div>
+                  ))}
                 </div>
 
-                <p className="text-muted-foreground text-sm mt-2">
-                  Delivery: {plan.delivery}
-                </p>
-              </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature, j) => (
-                  <li
-                    key={j}
-                    className="flex items-start gap-3 text-muted-foreground text-sm"
+                <div className="flex items-center gap-2 mt-auto">
+                  <button
+                    onClick={() => navigate(`/onboarding?plan=${plan.name}`)}
+                    className="flex-1 bg-[#152554] text-white hover:bg-[#0f1b40] transition-colors py-4 rounded-full font-medium text-sm md:text-base text-center justify-center flex"
+                    style={{ fontFamily: "'Inter', sans-serif" }}
                   >
-                    <span style={{ color: "#D0FF71" }}>→</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <button
-                className="w-full py-4 rounded-xl font-bold uppercase tracking-wide text-sm transition-all duration-300 hover:opacity-85"
-                style={{
-                  backgroundColor: "#D0FF71",
-                  color: "#0f0f0f",
-                }}
-                  onClick={() => {
-                  navigate(`/onboarding?plan=${plan.name}`);
-                     }}
-              >
-                Start Project
-              </button>
-            </div>
-          ))}
+                    Get In Touch
+                  </button>
+                  <button
+                    onClick={() => navigate(`/onboarding?plan=${plan.name}`)}
+                    className="w-14 h-14 shrink-0 bg-[#152554] hover:bg-[#0f1b40] transition-colors text-white rounded-full flex items-center justify-center"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </FadeIn>
+            );
+          })}
         </div>
 
-        {/* Payment Info */}
-        <div className="mt-16 text-center text-muted-foreground text-sm">
-          Accepted Payments: UPI • Bank Transfer • Razorpay • PayPal • Wise
-        </div>
       </div>
     </section>
   );

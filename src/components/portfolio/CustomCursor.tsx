@@ -9,8 +9,7 @@ export default function CustomCursor() {
     if (!cursor) return;
 
     const onMove = (e: MouseEvent) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
+      cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
     };
 
     const onMouseOver = (e: MouseEvent) => {
