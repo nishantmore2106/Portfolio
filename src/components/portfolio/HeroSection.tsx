@@ -27,13 +27,13 @@ export default function HeroSection() {
       />
 
       {/* Static Pill Cards (No floating animation) */}
-      <FadeIn delay={0.2} direction="none" className="absolute top-[45%] md:top-[45%] -left-8 sm:-left-4 md:left-1/2 md:-translate-x-[180%] lg:-translate-x-[220%] -rotate-[15deg] z-10 pointer-events-none">
+      <FadeIn delay={0.2} direction="none" className="absolute top-[45%] md:top-[40%] left-[5%] md:left-[15%] lg:left-[22%] xl:left-[28%] -rotate-[15deg] z-10 pointer-events-none">
         <div className="bg-white rounded-full px-4 py-2 md:px-8 md:py-4 shadow-xl">
           <span className="text-[#1a1a1a] font-medium text-xs md:text-lg whitespace-nowrap tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>Web design</span>
         </div>
       </FadeIn>
 
-      <FadeIn delay={0.3} direction="none" className="absolute top-[55%] md:top-[20%] -right-8 sm:-right-4 md:right-auto md:left-1/2 md:translate-x-[80%] lg:translate-x-[120%] rotate-[15deg] z-10 pointer-events-none">
+      <FadeIn delay={0.3} direction="none" className="absolute top-[55%] md:top-[25%] right-[5%] md:right-[15%] lg:right-[22%] xl:right-[28%] rotate-[15deg] z-10 pointer-events-none">
         <div className="bg-white rounded-full px-4 py-2 md:px-8 md:py-4 shadow-xl">
           <span className="text-[#1a1a1a] font-medium text-xs md:text-lg whitespace-nowrap tracking-wide" style={{ fontFamily: "'Inter', sans-serif" }}>Web design</span>
         </div>

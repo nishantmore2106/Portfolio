@@ -6,9 +6,12 @@ export default function ServicesSection() {
   return (
     <section 
       id="about" 
-      className="pt-16 pb-16 md:pt-24 md:pb-[40rem] lg:pb-[45rem] bg-[#f0f3f8] min-h-[110vh] md:min-h-[155vh] flex flex-col md:flex-row items-start relative overflow-hidden"
+      className="pt-16 pb-16 md:pt-24 md:pb-24 bg-[#f0f3f8] flex flex-col items-center relative overflow-hidden"
     >
-      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 flex flex-col md:flex-row justify-between items-start gap-12 md:gap-24 relative z-20">
+      <div className="w-full max-w-[1600px] mx-auto px-6 md:px-12 lg:px-24 flex flex-col relative z-20">
+        
+        {/* Top Content Row */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12 md:gap-24 mb-16 md:mb-24">
         
         {/* Left Side: Tag */}
         <FadeIn direction="right" delay={0.1} className="flex items-center gap-2 text-gray-800 shrink-0 mt-3">
@@ -54,10 +57,13 @@ export default function ServicesSection() {
           </FadeIn>
         </div>
 
-      </div>
-
-      {/* Portrait Image at Bottom Left */}
-      <FadeIn direction="up" delay={0.2} className="relative md:absolute mt-12 md:mt-0 md:bottom-12 md:left-8 lg:left-24 w-full md:w-[50%] lg:w-[550px] max-w-[600px] z-0 pointer-events-none self-center md:self-auto">
+        </div>
+        
+        {/* Bottom Content Row (Image + Cards) */}
+        <div className="flex flex-col lg:flex-row items-end justify-between gap-12 w-full">
+          
+          {/* Portrait Image at Bottom Left */}
+          <FadeIn direction="up" delay={0.2} className="relative w-full lg:w-[45%] xl:w-[500px] z-0 pointer-events-none self-center lg:self-end">
         <img 
           src="/assets/image copy 25.png" 
           alt="Portrait" 
@@ -65,10 +71,10 @@ export default function ServicesSection() {
         />
         {/* Bottom Fade to blend into background */}
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f0f3f8] via-[#f0f3f8]/80 to-transparent pointer-events-none" />
-      </FadeIn>
+          </FadeIn>
 
-      {/* Grid Cards at Bottom Right */}
-      <div className="relative md:absolute mt-8 md:mt-0 md:bottom-16 md:right-8 lg:right-12 z-10 w-full px-6 md:px-0 md:max-w-[850px] grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Grid Cards at Bottom Right */}
+          <div className="relative z-10 w-full lg:w-[55%] flex-1 grid grid-cols-1 sm:grid-cols-2 gap-6">
         
         {/* Card 1 */}
         <FadeIn direction="up" delay={0.1} className="bg-white rounded-[1.5rem] p-8 flex justify-between items-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]">
@@ -160,7 +166,9 @@ export default function ServicesSection() {
             </svg>
           </div>
         </FadeIn>
-        
+          
+        </div>
+        </div>
       </div>
     </section>
   );
