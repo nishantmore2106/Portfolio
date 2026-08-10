@@ -4,10 +4,8 @@ import { useContactModal } from "@/context/ContactModalContext";
 
 const menuLinks = [
   { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
   { name: "Projects", href: "#projects" },
   { name: "Pricing", href: "#pricing" },
-  { name: "FAQ", href: "#faq" },
   { name: "Services", href: "#services" },
 ];
 
@@ -24,22 +22,37 @@ export default function Header() {
           alt="Nishant Logo" 
           className="w-[72px] h-[72px] object-contain"
         />
-        <span className="bg-white text-black px-3 py-1 rounded-lg font-semibold text-xl tracking-tight mix-blend-difference shadow-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-          Nishant
-        </span>
       </div>
 
-      {/* Center: Nav Links */}
       <nav className="hidden lg:flex items-center gap-8 pointer-events-auto bg-white/40 backdrop-blur-md px-8 py-3 rounded-full border border-white/40 shadow-sm">
         {menuLinks.map((link, i) => (
-          <a 
+          <motion.a 
             key={link.name} 
             href={link.href}
-            className={`font-medium text-[15px] transition-colors ${i === 0 ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
+            className={`relative font-medium text-[15px] pb-0.5 flex overflow-hidden ${i === 0 ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'}`}
             style={{ fontFamily: "'Inter', sans-serif" }}
+            initial="rest"
+            whileHover="hover"
+            animate="rest"
           >
-            {link.name}
-          </a>
+            {link.name.split("").map((char, ci) => (
+              <motion.span
+                key={ci}
+                className="inline-block"
+                variants={{
+                  rest: { y: 0 },
+                  hover: { y: -3 },
+                }}
+                transition={{
+                  duration: 0.25,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: ci * 0.03,
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.a>
         ))}
       </nav>
 

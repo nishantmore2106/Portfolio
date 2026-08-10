@@ -62,34 +62,22 @@ export default function CoreServicesSection() {
             {/* Floating Tags */}
             <div className="absolute bottom-0 left-0 right-0 h-64 md:h-72 pointer-events-none overflow-hidden">
               <div className="relative w-full h-full scale-[1.15] md:scale-[1.25] origin-bottom">
-                {/* Marketing equivalent */}
-                <div className="absolute bottom-[35%] left-[15%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="absolute bottom-[35%] left-[10%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] transform rotate-3">
                   <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Prototyping</span>
                 </div>
-                {/* Taxes equivalent (Rotated) */}
-                <div className="absolute bottom-[40%] left-[45%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] transform rotate-[28deg] origin-left">
-                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">User Research</span>
-                </div>
-                {/* Income equivalent */}
-                <div className="absolute bottom-[20%] left-[35%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] z-10">
-                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Wireframing</span>
-                </div>
-                {/* Utility equivalent */}
-                <div className="absolute bottom-[15%] left-[8%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
-                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Figma</span>
-                </div>
-                {/* Rent equivalent */}
-                <div className="absolute bottom-[2%] left-[8%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                
+                <div className="absolute bottom-[40%] right-[10%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] transform -rotate-6 z-10">
                   <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">UI Design</span>
                 </div>
-                {/* Software equivalent */}
-                <div className="absolute bottom-[15%] right-[10%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
-                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">React.js</span>
+
+                <div className="absolute bottom-[10%] left-[20%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] transform -rotate-3">
+                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Figma</span>
                 </div>
-                {/* Operations equivalent */}
-                <div className="absolute bottom-[2%] right-[10%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
-                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Tailwind</span>
+                
+                <div className="absolute bottom-[15%] right-[25%] bg-[#f4f5f9] px-5 py-2 rounded-full shadow-[0_4px_10px_rgba(0,0,0,0.05)] transform rotate-6 z-10">
+                  <span className="text-[#3a3a40] text-[13px] font-medium whitespace-nowrap">Wireframing</span>
                 </div>
+
               </div>
             </div>
           </FadeIn>
@@ -175,16 +163,10 @@ export default function CoreServicesSection() {
               </ul>
             </div>
             
-            {/* Image Row Container */}
-            <div className="w-full flex flex-col md:flex-row items-end justify-between gap-3 md:gap-4 mt-auto mb-8 relative z-10">
-              <div className="w-full md:flex-1 aspect-video rounded-xl overflow-hidden border-[1.5px] border-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.1)] relative">
-                <img src="/assets/web_mockup_1.png" alt="Dashboard Mockup" className="absolute inset-0 w-full h-full object-cover object-center" />
-              </div>
-              <div className="w-full md:flex-1 aspect-video rounded-xl overflow-hidden border-[1.5px] border-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.1)] relative transform md:translate-y-2">
-                <img src="/assets/web_mockup_2.png" alt="E-commerce Mockup" className="absolute inset-0 w-full h-full object-cover object-center" />
-              </div>
-              <div className="w-full md:flex-1 aspect-video rounded-xl overflow-hidden border-[1.5px] border-white/30 shadow-[0_4px_15px_rgba(0,0,0,0.1)] relative">
-                <img src="/assets/web_mockup_3.png" alt="App Mockup" className="absolute inset-0 w-full h-full object-cover object-center" />
+            {/* Image Container */}
+            <div className="w-full flex items-end justify-center mt-auto mb-4 md:mb-8 relative z-10">
+              <div className="w-full aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.15)] relative">
+                <img src="/assets/ecommerce_web_experience.png" alt="Ecommerce Web Experience" className="absolute inset-0 w-full h-full object-cover object-center" />
               </div>
             </div>
           </FadeIn>

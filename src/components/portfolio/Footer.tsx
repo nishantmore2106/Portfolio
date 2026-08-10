@@ -4,12 +4,12 @@ import { useContactModal } from "@/context/ContactModalContext";
 export default function Footer() {
   const { openModal } = useContactModal();
   return (
-    <footer className="relative bg-gradient-to-b from-[#1b3475] to-[#091b48] pt-20 pb-10 overflow-hidden">
+    <footer className="relative bg-gradient-to-b from-[#1b3475] to-[#091b48] pt-20 pb-0 overflow-hidden">
       {/* Top Smoke Gradient to blend with section above */}
       <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#f4f7f9] to-transparent pointer-events-none z-0" />
-      
+
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
-        
+
         {/* Top: Headline & CTA */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
           <h2 className="text-white font-semibold text-4xl md:text-6xl lg:text-[5rem] tracking-tight leading-[1.05]" style={{ fontFamily: "'Inter', sans-serif" }}>
@@ -36,7 +36,7 @@ export default function Footer() {
             </svg>
             <span className="text-gray-900 font-medium text-xl md:text-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>Home</span>
           </a>
-          
+
           <a href="#about" className="border border-white/20 rounded-[1.5rem] p-6 md:p-8 flex flex-col justify-between h-[160px] md:h-[200px] transition-all hover:bg-white/10 hover:border-white/40">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -46,7 +46,7 @@ export default function Footer() {
             </svg>
             <span className="text-white font-medium text-xl md:text-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>About</span>
           </a>
-          
+
           <a href="#services" className="border border-white/20 rounded-[1.5rem] p-6 md:p-8 flex flex-col justify-between h-[160px] md:h-[200px] transition-all hover:bg-white/10 hover:border-white/40">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
               <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -55,7 +55,7 @@ export default function Footer() {
             </svg>
             <span className="text-white font-medium text-xl md:text-2xl" style={{ fontFamily: "'Inter', sans-serif" }}>Services</span>
           </a>
-          
+
           <a href="#projects" className="border border-white/20 rounded-[1.5rem] p-6 md:p-8 flex flex-col justify-between h-[160px] md:h-[200px] transition-all hover:bg-white/10 hover:border-white/40">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -70,26 +70,52 @@ export default function Footer() {
           <div className="text-white/60 text-sm md:text-base font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
             Designed & Developed By Nishant
           </div>
-          
+
           {/* Social Links */}
           <div className="flex items-center gap-4">
             <a href="#" className="w-10 h-10 bg-white rounded-full flex justify-center items-center text-gray-900 hover:scale-110 transition-transform">
               {/* LinkedIn */}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" /></svg>
             </a>
             <a href="https://www.instagram.com/itsnisahnt_21/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white rounded-full flex justify-center items-center text-gray-900 hover:scale-110 transition-transform">
               {/* Instagram */}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
           </div>
-          
+
           <div className="flex items-center gap-6 text-white/60 text-sm md:text-base font-medium" style={{ fontFamily: "'Inter', sans-serif" }}>
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
             <a href="#services" className="hover:text-white transition-colors">Services</a>
             <a href="#projects" className="hover:text-white transition-colors">Portfolio</a>
           </div>
         </div>
-        
+
+        {/* "I'm also on" Section */}
+        <div className="w-full flex flex-col mt-6">
+          <div className="flex flex-row justify-between items-center w-full mb-3 gap-4">
+            <p className="text-white text-3xl md:text-5xl lg:text-6xl tracking-tight font-extrabold" style={{ fontFamily: "'Syne', sans-serif" }}>
+              I'm also on
+            </p>
+            <a 
+              href="https://contra.com/nishant_more_7exx4e06?referralExperimentNid=DEFAULT_REFERRAL_PROGRAM&referrerUsername=nishant_more_7exx4e06"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center group shrink-0"
+            >
+              <img 
+                src="/assets/image 21 (1).png" 
+                alt="Hire me on Contra" 
+                className="h-10 md:h-16 w-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all" 
+              />
+            </a>
+          </div>
+          <img
+            src="/assets/image 20 (1).png"
+            alt="Platforms I'm on"
+            className="h-32 md:h-[280px] lg:h-[360px] w-auto object-contain object-left opacity-90 hover:opacity-100 transition-opacity -ml-3 mt-4"
+          />
+        </div>
+
       </div>
     </footer>
   );

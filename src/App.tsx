@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { ContactModalProvider } from "@/context/ContactModalContext";
 import ContactModal from "@/components/ui/ContactModal";
+import ChatBot from "@/components/ui/ChatBot";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -23,6 +24,7 @@ const App = () => (
       <Sonner />
       <ContactModalProvider>
         <ContactModal />
+        <ChatBot />
         <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
